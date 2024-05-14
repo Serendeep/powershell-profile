@@ -101,6 +101,18 @@ function Get-DiskUsage {
     Format-Table -AutoSize
 }
 
+function Show-SystemInfo {
+    $info = Get-ComputerInfo | Select-Object CsName, OsName, OsArchitecture, OsHardwareAbstractionLayer, WindowsProductName, WindowsEditionId, WindowsVersion, OsBuildType
+    $info | Format-List
+}
+
+function Repair-Network {
+    Write-Output "Resetting IP Stack..."
+    ipconfig /release
+    ipconfig /renew
+    ipconfig /flushdns
+    Write-Output "Network reset commands executed. Please check your connectivity."
+}
 
 # Alias
 Set-Alias -Name ci -Value code-insiders
