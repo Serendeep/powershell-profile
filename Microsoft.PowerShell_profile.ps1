@@ -1,7 +1,11 @@
-# Ensure posh-git and oh-my-posh are loaded only if they are going to be used
+# Load oh-my-posh if they are going to be used
 if ($env:POSH_THEMES_PATH) {
-    Import-Module posh-git
     oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\1_shell.omp.json" | Invoke-Expression
+}
+
+# Import Posh-Git if available
+if (Get-Module -ListAvailable -Name posh-git){
+    Import-Module posh-git
 }
 
 # Import Terminal-Icons if available
